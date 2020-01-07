@@ -3,28 +3,20 @@ package LastTryPack;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-
-import java.sql.*;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
 import javax.swing.JTextField;
-
-
-
 import javax.swing.JPasswordField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.*;
 
-public class DBManagmentApp {
+public class FimalDbManagment {
 
 	private JFrame frame;
-	private JTextField LoginTextField;
+	private JTextField loginTextField;
 	private JPasswordField passwordField;
-	
-	Connection con = null;
 
 	/**
 	 * Launch the application.
@@ -33,7 +25,7 @@ public class DBManagmentApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DBManagmentApp window = new DBManagmentApp();
+					FimalDbManagment window = new FimalDbManagment();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,14 +33,17 @@ public class DBManagmentApp {
 			}
 		});
 	}
+	
+	Connection con = null;
 
 	/**
 	 * Create the application.
 	 * @throws ClassNotFoundException 
 	 */
-	public DBManagmentApp() throws ClassNotFoundException {
+	public FimalDbManagment() throws ClassNotFoundException {
+		
 		initialize();
-		con = DatenbankConnection.getConnection();
+		con = SqlConnetionMaker.getConnection();
 	}
 
 	/**
@@ -56,37 +51,18 @@ public class DBManagmentApp {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 827, 426);
+		frame.setBounds(100, 100, 760, 476);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel label = new JLabel("Nutzername");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label.setBounds(198, 64, 102, 34);
-		frame.getContentPane().add(label);
-		
-		LoginTextField = new JTextField();
-		LoginTextField.setColumns(10);
-		LoginTextField.setBounds(359, 64, 267, 34);
-		frame.getContentPane().add(LoginTextField);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(359, 125, 267, 34);
-		frame.getContentPane().add(passwordField);
-		
-		JLabel label_1 = new JLabel("Passwort");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label_1.setBounds(198, 125, 102, 34);
-		frame.getContentPane().add(label_1);
-		
-		JButton button = new JButton("Login");
-		button.addActionListener(new ActionListener() {
+		JButton loginBtn = new JButton("New button");
+		loginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
 					String query = "select * from nutzer where USRNAME=? and pw=? ";
 					PreparedStatement pst = con.prepareStatement(query);
-					pst.setString(0, LoginTextField.getText());
+					pst.setString(0, loginTextField.getText());
 					pst.setString(1, passwordField.getText());
 					
 					ResultSet rs = pst.executeQuery();
@@ -111,13 +87,27 @@ public class DBManagmentApp {
 				} catch (Exception e2) {
 					// TODO: handle exception
 				}
-				
-				
 			}
 		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		button.setBounds(410, 239, 115, 46);
-		frame.getContentPane().add(button);
+		loginBtn.setBounds(378, 258, 100, 37);
+		frame.getContentPane().add(loginBtn);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(185, 129, 76, 37);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(185, 177, 85, 37);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		loginTextField = new JTextField();
+		loginTextField.setBounds(294, 129, 297, 37);
+		frame.getContentPane().add(loginTextField);
+		loginTextField.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(294, 186, 297, 28);
+		frame.getContentPane().add(passwordField);
 	}
 
 }

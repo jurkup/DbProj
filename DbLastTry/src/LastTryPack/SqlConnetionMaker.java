@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class DatenbankConnection {
+public class SqlConnetionMaker {
 	
 
 	public static Connection getConnection() throws ClassNotFoundException {
