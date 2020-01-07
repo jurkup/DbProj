@@ -46,17 +46,17 @@ public class KundenKundenKunden extends JFrame {
 	public KundenKundenKunden() throws ClassNotFoundException {
 		con = DatenbankenConnection.getConnection();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 300);
+		setBounds(100, 100, 683, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Kunden aktualisieren");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*try {
-					String query = "select * fom kunde";
+				try {
+					String query = "select * from kunde";
 					PreparedStatement pst = con.prepareStatement(query);
 					ResultSet rs = pst.executeQuery();
 					
@@ -66,14 +66,14 @@ public class KundenKundenKunden extends JFrame {
 					
 				} catch (SQLException e1) {
 					e1.printStackTrace();
-				}*/
+				}
 			}
 		});
-		btnNewButton.setBounds(896, 5, 85, 253);
+		btnNewButton.setBounds(438, 98, 132, 46);
 		contentPane.add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(111, 48, 360, 148);
+		scrollPane.setBounds(58, 47, 360, 148);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();

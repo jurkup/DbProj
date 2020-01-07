@@ -1,15 +1,19 @@
-package DataPack;
+package LastTryPack;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
-public class DatenbankenConnection {
+
+public class DatenbankConnection {
 	
+
 	public static Connection getConnection() throws ClassNotFoundException {
 		try {
 			
 			Connection connection= DriverManager.getConnection("jdbc:mariadb://localhost:3306/modsimbank", "root", "egal");
-			JOptionPane.showMessageDialog(null, "Connection Successful");
+			
 
 	        return connection;
 			}catch (SQLException e) {
